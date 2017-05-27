@@ -7,20 +7,22 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	private int score;
+	const int MAX_SCORE = 8;
 
 	public Text countText;
+	public Text winText;
 	private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
-		rb 	  = GetComponent<Rigidbody>();
-		score = 0;
+		rb 	  		 = GetComponent<Rigidbody>();
+		score 		 = 0;
+		winText.text = "";
 		UpdateCountText ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     // Called before any physics calculations
@@ -36,10 +38,14 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 			score++;
 			UpdateCountText ();
+			if (score == MAX_SCORE) {
+				winText.text = "You Win";
+			}
 		}
 	}
 
 	void UpdateCountText(){
 		countText.text = "Count: " + score.ToString();
 	}
+
 }
